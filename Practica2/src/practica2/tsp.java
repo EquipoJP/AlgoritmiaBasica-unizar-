@@ -12,9 +12,9 @@ import java.io.FileNotFoundException;
 public class tsp {
 
 	public static void main(String[] args) {
-		int[][] grafo;
+		int[][] grafo = null;
 		int n = args.length;
-		boolean dynamic;
+		boolean dynamic = false;
 
 		/* comprobacion del numero de argumentos */
 		if (n != 2) {
@@ -63,5 +63,12 @@ public class tsp {
 		}
 		
 		/* parametros correctos */
+		
+		if (dynamic){
+			//TODO invocar al metodo de programacion dinamica
+		}
+		else{
+			FuerzaBruta.showCaminosHamiltonianos(grafo);
+		}
 	}
 }
