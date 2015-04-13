@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
  * @author Jaime Ruiz-Borau Vizarraga (546751)
  * @author Patricia Lazaro Tello (554309)
  * 
- *         Clase principal desde la que se lanza la aplicacion
+ * Clase principal desde la que se lanza la aplicacion
  */
 
 public class tsp {
