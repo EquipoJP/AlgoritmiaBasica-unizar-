@@ -14,38 +14,64 @@ import java.util.List;
 
 public class FuerzaBruta {
 
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) throws FileNotFoundException {
 		String path = "./data/grafo.txt";
 		int[][] matriz = Fichero.getGrafo(path);
 		showCaminosHamiltonianos(matriz);
 	}
-	
+
+	/**
+	 * Aplica el algoritmo de fuerza bruta para resolver el problema de caminos
+	 * hamiltonianos en un grafo representado por su matriz de adyacencia
+	 * 
+	 * @param matrizAdyacencia
+	 *            : matriz de adyacencia que representa un grafo
+	 */
 	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
 		List<Integer> visitados = new ArrayList<Integer>();
 
 		searchCaminosHamiltonianosRec(matrizAdyacencia, visitados, 0, 0);
 	}
 
+	/**
+	 * Aplica el algoritmo de fuerza bruta para resolver el problema de caminos
+	 * hamiltonianos en un grafo representado por su matriz de adyacencia,
+	 * considerando que se han visitado ya los vertices de <visitados>, que el
+	 * vertice a explorar es <nodoActual> y que se ha de volver al vertice
+	 * <nodoOrigen>
+	 * 
+	 * @param matrizAdyacencia
+	 *            : matriz de adyacencia que representa un grafo
+	 * @param visitados
+	 *            : lista que representa los nodos ya visitados (en el orden en
+	 *            que se visitaron)
+	 * @param nodoActual
+	 *            : vertice desde el cual exploramos soluciones
+	 * @param nodoOrigen
+	 *            : vertice de finalizacion tras recorrer el resto de vertices
+	 */
 	private static void searchCaminosHamiltonianosRec(int[][] matrizAdyacencia,
 			List<Integer> visitados, int nodoActual, int nodoOrigen) {
-		// Caso base. Ya hemos encontrado un camino hamiltoniano
+		// Caso base. Ya se ha encontrado un camino hamiltoniano
 		if (visitados.size() == matrizAdyacencia.length
 				&& nodoActual == nodoOrigen) {
 			visitados.add(nodoActual);
 			System.out.println(visitados.toString());
 		} else if (visitados.size() == matrizAdyacencia.length
 				&& nodoActual != nodoOrigen) {
-			// No hacemos nada. No hemos vuelto al origen, no es un camino
-			// hamiltoniano
+			// Se han recorrido los vertices pero no se h llegado al vertice
+			// inicial
 		} else {
 			if (visitados.contains(nodoActual)) {
-				// No hacemos nada. Este nodo ya lo hemos mirado
+				// Ya se ha explorado dicho vertice
 			} else {
 				visitados.add(nodoActual);
 				for (int i = 0; i < matrizAdyacencia.length; i++) {
 					if (i != nodoActual) {
-						searchCaminosHamiltonianosRec(matrizAdyacencia,
-								visitados, i, nodoOrigen);
+						List<Integer> vis = new ArrayList<Integer>();
+						vis.addAll(visitados);
+						searchCaminosHamiltonianosRec(matrizAdyacencia, vis, i,
+								nodoOrigen);
 					}
 				}
 			}
