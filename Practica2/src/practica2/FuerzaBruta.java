@@ -10,4 +10,5 @@ package practica2;
 
 public class FuerzaBruta {
 
+	//Penes para todos
 }
