@@ -22,7 +22,6 @@ public class BateriaPruebas {
 	 * 
 	 * @param args
 	 */
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		while (true) {
 			System.out.println("Introduzca numero de pruebas: ");
@@ -32,6 +31,7 @@ public class BateriaPruebas {
 				System.out.println("Ejecutando " + n + " pruebas...");
 				Pruebas(n);
 			}
+			s.close();
 		}
 	}
 

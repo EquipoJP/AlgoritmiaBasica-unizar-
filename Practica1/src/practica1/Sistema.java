@@ -23,6 +23,8 @@ public class Sistema {
 	 * @param args
 	 *            [2] = Longitud del intervalo o MAX_INTERVAL_LENGTH si no
 	 *            especifica nada
+	 * 
+	 * Precondicion: (args[0] > 0), (args[1] > 0), (args[2] > 0)
 	 */
 
 	public static void main(String[] args) {
