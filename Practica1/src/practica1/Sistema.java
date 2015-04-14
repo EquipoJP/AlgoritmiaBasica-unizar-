@@ -44,6 +44,7 @@ public class Sistema {
 				System.err
 						.println("Ejecucion incorrecta del programa."
 								+ "\nComo minimo se ha de especificar los n intervalos");
+				System.exit(-1);
 			} else if (args.length == 1) {
 				// Solo hay un parametro
 				n = Integer.parseInt(args[0]);

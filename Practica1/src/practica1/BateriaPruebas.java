@@ -23,16 +23,22 @@ public class BateriaPruebas {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		while (true) {
+
+		Scanner s = new Scanner(System.in);
+		int n = 1;
+
+		System.out.println("Para salir, introduzca numero menor que 1");
+
+		while (n > 0) {
 			System.out.println("Introduzca numero de pruebas: ");
-			Scanner s = new Scanner(System.in);
-			int n = s.nextInt();
+			n = s.nextInt();
 			if (n > 0) {
 				System.out.println("Ejecutando " + n + " pruebas...");
 				Pruebas(n);
 			}
-			s.close();
 		}
+		System.out.println("Saliendo del programa...");
+		s.close();
 	}
 
 	/**
@@ -40,6 +46,8 @@ public class BateriaPruebas {
 	 * 
 	 * @param n
 	 *            : numero de pruebas a realizar
+	 * 
+	 *            Precondicion: (n > 0)
 	 */
 	private static void Pruebas(int n) {
 
