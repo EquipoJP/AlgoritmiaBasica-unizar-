@@ -35,6 +35,8 @@ public class Fichero {
 
 			for (int j = 0; j < n; j++) {
 				int elem = s.nextInt();
+				if(elem == 0)
+					elem = Integer.MAX_VALUE;
 				grafo[i][j] = elem;
 			}
 			s.nextLine();
