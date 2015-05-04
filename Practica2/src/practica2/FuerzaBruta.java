@@ -30,7 +30,7 @@ public class FuerzaBruta {
 	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
 		List<Integer> visitados = new ArrayList<Integer>();
 
-		searchCaminosHamiltonianosRec(matrizAdyacencia, visitados, 0, 0);
+		searchCaminosHamiltonianosRec(matrizAdyacencia, visitados, 0, 0, 0);
 	}
 
 	/**
@@ -51,15 +51,16 @@ public class FuerzaBruta {
 	 *            : vertice de finalizacion tras recorrer el resto de vertices
 	 */
 	private static void searchCaminosHamiltonianosRec(int[][] matrizAdyacencia,
-			List<Integer> visitados, int nodoActual, int nodoOrigen) {
+			List<Integer> visitados, int nodoActual, int nodoOrigen, int coste) {
 		// Caso base. Ya se ha encontrado un camino hamiltoniano
 		if (visitados.size() == matrizAdyacencia.length
 				&& nodoActual == nodoOrigen) {
 			visitados.add(nodoActual);
 			System.out.println(visitados.toString());
+			System.out.println(coste);
 		} else if (visitados.size() == matrizAdyacencia.length
 				&& nodoActual != nodoOrigen) {
-			// Se han recorrido los vertices pero no se h llegado al vertice
+			// Se han recorrido los vertices pero no se ha llegado al vertice
 			// inicial
 		} else {
 			if (visitados.contains(nodoActual)) {
@@ -67,11 +68,11 @@ public class FuerzaBruta {
 			} else {
 				visitados.add(nodoActual);
 				for (int i = 0; i < matrizAdyacencia.length; i++) {
-					if (i != nodoActual) {
+					if (i != nodoActual && matrizAdyacencia[nodoActual][i] < Integer.MAX_VALUE) {
 						List<Integer> vis = new ArrayList<Integer>();
 						vis.addAll(visitados);
 						searchCaminosHamiltonianosRec(matrizAdyacencia, vis, i,
-								nodoOrigen);
+								nodoOrigen, coste + matrizAdyacencia[nodoActual][i]);
 					}
 				}
 			}
