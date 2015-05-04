@@ -65,7 +65,7 @@ public class tsp {
 		/* parametros correctos */
 		
 		if (dynamic){
-			//TODO invocar al metodo de programacion dinamica
+			ProgDinamica.showCaminosHamiltonianos(grafo);
 		}
 		else{
 			FuerzaBruta.showCaminosHamiltonianos(grafo);
