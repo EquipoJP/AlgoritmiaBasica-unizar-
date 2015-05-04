@@ -1,10 +1,8 @@
 package practica2;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -18,83 +16,50 @@ import java.util.Set;
 
 public class ProgDinamica {
 
+	private static List<Integer> recorrido;
+	
+	public static void main(String[] args) throws FileNotFoundException{
+		int[][] testingu = Fichero.getGrafo("grafo.txt");
+		showCaminosHamiltonianos(testingu);
+	}
+	
 	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
-		Hashtable<Set<Integer>, List<Integer>> gtab = new Hashtable<Set<Integer>, List<Integer>>();
-		gtab = initGtab(gtab, matrizAdyacencia);
+		Gtab.initGtab(matrizAdyacencia);
+		HashSet<Integer> h = new HashSet<Integer>();
+		for(int i = 0; i<matrizAdyacencia.length;i++){
+			h.add(i);
+		}
+		recorrido = new ArrayList<Integer>();
+		System.out.println(g(0,h,matrizAdyacencia));
+		System.out.println(recorrido.toString());
 	}
 
-	/**
-	 * 
-	 * @param gtab
-	 * @param matrizAdyacencia
-	 * @return
-	 */
-	private static Hashtable<Set<Integer>, List<Integer>> initGtab(
-			Hashtable<Set<Integer>, List<Integer>> gtab,
-			int[][] matrizAdyacencia) {
-
-		List<Set<Integer>> sets = initSets(matrizAdyacencia);
-		
-		for (Set<Integer> set : sets) {
-			List<Integer> lista = new ArrayList<Integer>();
-			for (int i = 0; i < matrizAdyacencia.length; i++) {
-				lista.add(i, i);
+	public static int g(int i, Set<Integer> S, int[][] L) {
+		recorrido.add(i);
+		if(S.size()==0){
+			return L[i][0];
+		}
+		else{
+			if(Gtab.getGtab().get(S).get(i)>=0){
+				return Gtab.getGtab().get(S).get(i);
 			}
-			gtab.put(set, lista);
-		}
-
-		return null;
-	}
-
-	/**
-	 * 
-	 * @param matrizAdyacencia
-	 * @return
-	 */
-	private static List<Set<Integer>> initSets(int[][] matrizAdyacencia){
-		List<Set<Integer>> sets = new LinkedList<Set<Integer>>();
-		int[] items = new int[matrizAdyacencia.length];
-		for (int i = 0; i < matrizAdyacencia.length; i++) {
-			items[i] = i;
-		}
-		for (int k = 1; k <= items.length; k++) {
-			List<Set<Integer>> parcial = new LinkedList<Set<Integer>>();
-			sets.addAll(kcomb(items, 0, k, new int[k], parcial));
-		}
-		
-		return sets;
-	}
-
-	/**
-	 * http://stackoverflow.com/questions/2599499/k-combinations-of-a-set-of-
-	 * integers-in-ascending-size-order
-	 * 
-	 * @param items
-	 * @param n
-	 * @param k
-	 * @param arr
-	 * @param parcial
-	 * @return
-	 */
-	private static List<Set<Integer>> kcomb(int[] items, int n, int k,
-			int[] arr, List<Set<Integer>> parcial) {
-		if (k == 0) {
-			System.out.println(Arrays.toString(arr));
-			Set<Integer> set = new HashSet<Integer>();
-			for (int i = 0; i < arr.length; i++) {
-				set.add(arr[i]);
+			else{
+				Integer masCorto = Integer.MAX_VALUE;
+				for(int j : S){
+					HashSet<Integer> temp = new HashSet<Integer>();
+					temp.addAll(S);
+					temp.remove(j);
+					int distancia = L[i][j]+g(j,temp,L);
+					if(distancia<masCorto){
+						masCorto=distancia;
+						System.out.println(masCorto);
+					}
+				}
+				Gtab.getGtab().get(S).set(i, masCorto);
+				return masCorto;
 			}
-			parcial.add(set);
-			return parcial;
-		} else {
-			List<Set<Integer>> new_parcial = new LinkedList<Set<Integer>>();
-			for (int i = n; i <= items.length - k; i++) {
-				arr[arr.length - k] = items[i];
-				List<Set<Integer>> aux = kcomb(items, i + 1, k - 1, arr,
-						parcial);
-				new_parcial.addAll(aux);
-			}
-			return new_parcial;
 		}
 	}
+	
+	
 }
