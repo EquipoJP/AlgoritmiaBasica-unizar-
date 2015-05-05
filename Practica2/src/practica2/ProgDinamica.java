@@ -33,7 +33,7 @@ public class ProgDinamica {
 	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
 		Gtab.initGtab(matrizAdyacencia);
 		HashSet<Integer> h = new HashSet<Integer>();
-		for (int i = 0; i < matrizAdyacencia.length; i++) {
+		for (int i = 1; i < matrizAdyacencia.length; i++) {
 			h.add(i);
 		}
 
@@ -54,8 +54,9 @@ public class ProgDinamica {
 		if (S.size() == 0) {
 			List<Integer> rec = new ArrayList<Integer>();
 			rec.add(i);
+			rec.add(0);
 			Info info = new Info(L[i][0], rec);
-			System.out.println("Caso trivial: " + info.getRecorrido());
+//			System.out.println("Caso trivial: " + info.getRecorrido());
 			return info;
 		} else {
 			if (Gtab.getGtab().get(S).get(i).getCoste() >= 0) {
@@ -74,9 +75,9 @@ public class ProgDinamica {
 						rec = info.getRecorrido();
 					}
 				}
-				rec.add(i);
+				rec.add(0,i);
 				Gtab.getGtab().get(S).set(i, new Info(masCorto, rec));
-				System.out.println("No trivial --> " + rec);
+//				System.out.println("No trivial --> " + rec);
 				return new Info(masCorto, rec);
 			}
 		}
