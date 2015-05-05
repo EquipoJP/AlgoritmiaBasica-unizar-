@@ -3,7 +3,6 @@ package practica2;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -17,18 +16,16 @@ import java.util.Set;
 
 public class ProgDinamica {
 
-	private static List<Integer> recorrido;
-	
 	/**
 	 * 
 	 * @param args
 	 * @throws FileNotFoundException
 	 */
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) throws FileNotFoundException {
 		int[][] testingu = Fichero.getGrafo("grafo.txt");
 		showCaminosHamiltonianos(testingu);
 	}
-	
+
 	/**
 	 * 
 	 * @param matrizAdyacencia
@@ -36,12 +33,14 @@ public class ProgDinamica {
 	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
 		Gtab.initGtab(matrizAdyacencia);
 		HashSet<Integer> h = new HashSet<Integer>();
-		for(int i = 0; i<matrizAdyacencia.length;i++){
+		for (int i = 0; i < matrizAdyacencia.length; i++) {
 			h.add(i);
 		}
-		recorrido = new ArrayList<Integer>();
-		System.out.println(g(0,h,matrizAdyacencia));
-		System.out.println(recorrido.toString());
+
+		Info info = g(0, h, matrizAdyacencia);
+
+		System.out.println(info.getCoste());
+		System.out.println(info.getRecorrido());
 	}
 
 	/**
@@ -51,35 +50,35 @@ public class ProgDinamica {
 	 * @param L
 	 * @return
 	 */
-	public static int g(int i, Set<Integer> S, int[][] L) {
-		if(S.size()==0){
-			recorrido.add(i);
-			return L[i][0];
-		}
-		else{
-			if(Gtab.getGtab().get(S).get(i)>=0){
-				recorrido.add(i);
+	public static Info g(int i, Set<Integer> S, int[][] L) {
+		if (S.size() == 0) {
+			List<Integer> rec = new ArrayList<Integer>();
+			rec.add(i);
+			Info info = new Info(L[i][0], rec);
+			System.out.println("Caso trivial: " + info.getRecorrido());
+			return info;
+		} else {
+			if (Gtab.getGtab().get(S).get(i).getCoste() >= 0) {
 				return Gtab.getGtab().get(S).get(i);
-			}
-			else{
+			} else {
 				Integer masCorto = Integer.MAX_VALUE;
-				int id = -1;
-				for(int j : S){
+				List<Integer> rec = new ArrayList<Integer>();
+				for (int j : S) {
 					HashSet<Integer> temp = new HashSet<Integer>();
 					temp.addAll(S);
 					temp.remove(j);
-					int distancia = L[i][j]+g(j,temp,L);
-					if(distancia<masCorto && distancia > 0){
-						masCorto=distancia;
-						id = j;
+					Info info = g(j, temp, L);
+					int distancia = L[i][j] + info.getCoste();
+					if (distancia < masCorto && distancia > 0) {
+						masCorto = distancia;
+						rec = info.getRecorrido();
 					}
 				}
-				recorrido.add(id);
-				Gtab.getGtab().get(S).set(i, masCorto);
-				return masCorto;
+				rec.add(i);
+				Gtab.getGtab().get(S).set(i, new Info(masCorto, rec));
+				System.out.println("No trivial --> " + rec);
+				return new Info(masCorto, rec);
 			}
 		}
 	}
-	
-	
 }

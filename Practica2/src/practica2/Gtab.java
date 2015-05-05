@@ -9,9 +9,9 @@ import java.util.Set;
 
 public class Gtab {
 
-	private static Hashtable<Set<Integer>, List<Integer>> gtab = null;
+	private static Hashtable<Set<Integer>, List<Info>> gtab = null;
 
-	public static Hashtable<Set<Integer>, List<Integer>> getGtab(){
+	public static Hashtable<Set<Integer>, List<Info>> getGtab(){
 		return gtab;
 	}
 	
@@ -22,13 +22,14 @@ public class Gtab {
 	 * @return
 	 */
 	public static void initGtab(int[][] matrizAdyacencia) {
-		gtab = new Hashtable<Set<Integer>, List<Integer>>();
+		gtab = new Hashtable<Set<Integer>, List<Info>>();
 		List<Set<Integer>> sets = initSets(matrizAdyacencia);
 
 		for (Set<Integer> set : sets) {
-			List<Integer> lista = new ArrayList<Integer>();
+			List<Info> lista = new ArrayList<Info>();
 			for (int i = 0; i < matrizAdyacencia.length; i++) {
-				lista.add(i, -1);
+				Info info = new Info(-1, null);
+				lista.add(i, info);
 			}
 			gtab.put(set, lista);
 		}
