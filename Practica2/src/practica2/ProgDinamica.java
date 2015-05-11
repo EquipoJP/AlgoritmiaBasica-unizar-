@@ -44,8 +44,8 @@ public class ProgDinamica {
 
 		Info info = g(0, h, matrizAdyacencia);
 
-		System.out.println(info.getCoste());
-		System.out.println(info.getRecorrido());
+		System.out.println("Coste: " + info.getCoste());
+		System.out.println("Recorrido: " + info.getRecorrido());
 	}
 
 	/**
