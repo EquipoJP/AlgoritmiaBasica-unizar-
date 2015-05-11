@@ -17,9 +17,11 @@ import java.util.Set;
 public class ProgDinamica {
 
 	/**
+	 * Basandose en un fichero llamado "grafo.txt" muestra los caminos hamiltonianos
+	 * empleando programacion dinamica. Usado para testeo.
 	 * 
-	 * @param args
-	 * @throws FileNotFoundException
+	 * @param args: No empleado
+	 * @throws FileNotFoundException: Si el fichero no existe
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		int[][] testingu = Fichero.getGrafo("grafo.txt");
@@ -27,8 +29,11 @@ public class ProgDinamica {
 	}
 
 	/**
+	 * Aplica el método de programacion dinamica para resolver el problema de caminos
+	 * hamiltonianos en un grafo representado por su matriz de adyacencia
 	 * 
 	 * @param matrizAdyacencia
+	 *            : matriz de adyacencia que representa un grafo
 	 */
 	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
 		Gtab.initGtab(matrizAdyacencia);

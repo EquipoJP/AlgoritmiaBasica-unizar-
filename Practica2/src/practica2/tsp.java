@@ -11,14 +11,23 @@ import java.io.FileNotFoundException;
 
 public class tsp {
 
+	/**
+	 * Metodo principal desde el que se lanza la aplicacion
+	 * 
+	 * @param args: args[0] = [-d | -b]
+	 * 					-d: Solucion progDinamica
+	 * 					-b: Solucion fuerza bruta
+	 * 				args[1] = String con el nombre del fichero
+	 */
+	
 	public static void main(String[] args) {
 		int[][] grafo = null;
 		int n = args.length;
 		boolean dynamic = false;
 
-		/* comprobacion del numero de argumentos */
+		/* Comprobacion del numero de argumentos */
 		if (n != 2) {
-			/* error en los parametros: salida */
+			/* Error en los parametros: salida */
 			System.out.println("Ejecucion del programa: tsp -[opcion] <fichero>,");
 			System.out.println("\t Opcion : [-d | -b],");
 			
@@ -38,7 +47,7 @@ public class tsp {
 		
 		String arg1 = args[0];
 		
-		/* comprobacion del primer argumento */
+		/* Comprobacion del primer argumento */
 		if(arg1.compareTo("-d") == 0){
 			dynamic = true;
 		}
@@ -62,7 +71,7 @@ public class tsp {
 			System.exit(-1);
 		}
 		
-		/* parametros correctos */
+		/* Parametros correctos */
 		
 		if (dynamic){
 			ProgDinamica.showCaminosHamiltonianos(grafo);

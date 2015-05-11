@@ -14,6 +14,14 @@ import java.util.List;
 
 public class FuerzaBruta {
 
+	/**
+	 * Basandose en un fichero llamado "grafo.txt" muestra los caminos hamiltonianos
+	 * empleando fuerza bruta. Usado para testeo.
+	 * 
+	 * @param args: No empleado
+	 * @throws FileNotFoundException: Si el fichero no existe
+	 */
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		String path = "./data/grafo.txt";
 		int[][] matriz = Fichero.getGrafo(path);

@@ -7,19 +7,32 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Jaime Ruiz-Borau Vizarraga (546751)
+ * @author Patricia Lazaro Tello (554309)
+ * 
+ * Clase auxiliar para el tratamiento de la tabla auxiliar
+ * para programacion dinamica Gtab
+ */
+
 public class Gtab {
 
+	/* Atributos privados */
 	private static Hashtable<Set<Integer>, List<Info>> gtab = null;
-
-	public static Hashtable<Set<Integer>, List<Info>> getGtab(){
-		return gtab;
-	}
 	
 	/**
+	 * Metodo que inicializa la tabla gtab. Requiere de una matriz
+	 * de adyacencia para ello, y rellena la gtab con pares clave-valor,
+	 * donde la clave es un conjunto de nodos restantes a emplear (set de
+	 * integer) y el valor es una lista de Info.
+	 * Esta lista representa mediante sus indices el siguiente nodo que 
+	 * se escoge para el camino; y mediante el objeto info se representa el 
+	 * coste y el recorrido del camino que se tomara si se sigue el nodo 
+	 * representado por el indice de la lista
 	 * 
-	 * @param gtab
-	 * @param matrizAdyacencia
-	 * @return
+	 * @param matrizAdyacencia:
+	 * 				la matriz de adyacencia que se usara para inicializar
+	 * 				la gtab
 	 */
 	public static void initGtab(int[][] matrizAdyacencia) {
 		gtab = new Hashtable<Set<Integer>, List<Info>>();
@@ -36,9 +49,22 @@ public class Gtab {
 	}
 
 	/**
+	 * Metodo que devuelve la gtab actual
 	 * 
-	 * @param matrizAdyacencia
-	 * @return
+	 * @return: la gtab actual
+	 */
+	public static Hashtable<Set<Integer>, List<Info>> getGtab(){
+		return gtab;
+	}
+	
+	/**
+	 * Metodo que inicializa todas las combinaciones de sets posibles
+	 * de la gtab dada una matriz de adyacencia
+	 * 
+	 * @param matrizAdyacencia:
+	 * 				la matriz de adyacencia que se usara para inicializar
+	 * 				la lista de sets
+	 * @return: la lista de sets con todas las combinaciones posibles de nodos
 	 */
 	private static List<Set<Integer>> initSets(int[][] matrizAdyacencia) {
 		List<Set<Integer>> sets = new LinkedList<Set<Integer>>();
