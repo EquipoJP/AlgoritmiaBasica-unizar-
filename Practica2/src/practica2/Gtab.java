@@ -83,15 +83,12 @@ public class Gtab {
 	}
 
 	/**
+	 * Metodo para calcular todas las combinaciones de sets posibles para
+	 * la tabla Gtab
+	 * 
+	 * Este metodo no es original, se ha obtenido del siguiente enlace:
 	 * http://stackoverflow.com/questions/2599499/k-combinations-of-a-set-of-
 	 * integers-in-ascending-size-order
-	 * 
-	 * @param items
-	 * @param n
-	 * @param k
-	 * @param arr
-	 * @param parcial
-	 * @return
 	 */
 	private static List<Set<Integer>> kcomb(int[] items, int n, int k,
 			int[] arr, List<Set<Integer>> parcial) {

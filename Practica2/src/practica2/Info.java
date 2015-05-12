@@ -6,9 +6,9 @@ import java.util.List;
  * @author Jaime Ruiz-Borau Vizarraga (546751)
  * @author Patricia Lazaro Tello (554309)
  * 
- * Clase auxiliar para el tratamiento de tuplas del tipo
- * {coste,recorrido}. La definicion de "coste" y "recorrido"
- * se encuentra en el constructor
+ *         Clase auxiliar para el tratamiento de tuplas del tipo
+ *         {coste,recorrido}. La definicion de "coste" y "recorrido" se
+ *         encuentra en el constructor
  */
 
 public class Info {
@@ -18,14 +18,15 @@ public class Info {
 	private List<Integer> recorrido;
 
 	/**
-	 * Constructor de un objeto tipo Info. El objeto representa
-	 * un camino mediante una lista (recorrido) cuyo nodo de indice
-	 * mas bajo es el nodo origen y el de indice mas alto es el nodo
-	 * destino; y al mismo tiempo posee un entero (coste) que representa
-	 * el coste de recorrer ese camino
+	 * Constructor de un objeto tipo Info. El objeto representa un camino
+	 * mediante una lista (recorrido) cuyo nodo de indice mas bajo es el nodo
+	 * origen y el de indice mas alto es el nodo destino; y al mismo tiempo
+	 * posee un entero (coste) que representa el coste de recorrer ese camino
 	 * 
-	 * @param coste: entero que representa el coste de recorrer "recorrido"
-	 * @param recorrido: lista que representa el camino que se recorre
+	 * @param coste
+	 *            : entero que representa el coste de recorrer "recorrido"
+	 * @param recorrido
+	 *            : lista que representa el camino que se recorre
 	 */
 	public Info(int coste, List<Integer> recorrido) {
 		super();

@@ -17,11 +17,13 @@ import java.util.Set;
 public class ProgDinamica {
 
 	/**
-	 * Basandose en un fichero llamado "grafo.txt" muestra los caminos hamiltonianos
-	 * empleando programacion dinamica. Usado para testeo.
+	 * Basandose en un fichero llamado "grafo.txt" muestra los caminos
+	 * hamiltonianos empleando programacion dinamica. Usado para testeo.
 	 * 
-	 * @param args: No empleado
-	 * @throws FileNotFoundException: Si el fichero no existe
+	 * @param args
+	 *            : No empleado
+	 * @throws FileNotFoundException
+	 *             : Si el fichero no existe
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		int[][] testingu = Fichero.getGrafo("grafo.txt");
@@ -29,8 +31,9 @@ public class ProgDinamica {
 	}
 
 	/**
-	 * Aplica el método de programacion dinamica para resolver el problema de caminos
-	 * hamiltonianos en un grafo representado por su matriz de adyacencia
+	 * Aplica el método de programacion dinamica para resolver el problema de
+	 * caminos hamiltonianos en un grafo representado por su matriz de
+	 * adyacencia
 	 * 
 	 * @param matrizAdyacencia
 	 *            : matriz de adyacencia que representa un grafo
@@ -49,11 +52,18 @@ public class ProgDinamica {
 	}
 
 	/**
+	 * Función con memoria "g" que ejecuta el algoritmo de programacion dinamica
+	 * y emplea la tabla gtab para encontrar el camino hamiltoniano de menor
+	 * coste
 	 * 
 	 * @param i
+	 *            : Nodo actual
 	 * @param S
+	 *            : Conjunto de nodos restantes
 	 * @param L
-	 * @return
+	 *            : Matriz de adyacencia con los costes de cada camino
+	 * @return el objeto Info con el recorrido más corto para recorrer el set de
+	 *         nodos S y el coste de recorrer ese camino
 	 */
 	public static Info g(int i, Set<Integer> S, int[][] L) {
 		if (S.size() == 0) {
@@ -61,7 +71,6 @@ public class ProgDinamica {
 			rec.add(i);
 			rec.add(0);
 			Info info = new Info(L[i][0], rec);
-//			System.out.println("Caso trivial: " + info.getRecorrido());
 			return info;
 		} else {
 			if (Gtab.getGtab().get(S).get(i).getCoste() >= 0) {
@@ -80,9 +89,8 @@ public class ProgDinamica {
 						rec = info.getRecorrido();
 					}
 				}
-				rec.add(0,i);
+				rec.add(0, i);
 				Gtab.getGtab().get(S).set(i, new Info(masCorto, rec));
-//				System.out.println("No trivial --> " + rec);
 				return new Info(masCorto, rec);
 			}
 		}

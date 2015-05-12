@@ -15,13 +15,15 @@ import java.util.List;
 public class FuerzaBruta {
 
 	/**
-	 * Basandose en un fichero llamado "grafo.txt" muestra los caminos hamiltonianos
-	 * empleando fuerza bruta. Usado para testeo.
+	 * Basandose en un fichero llamado "grafo.txt" muestra los caminos
+	 * hamiltonianos empleando fuerza bruta. Usado para testeo.
 	 * 
-	 * @param args: No empleado
-	 * @throws FileNotFoundException: Si el fichero no existe
+	 * @param args
+	 *            : No empleado
+	 * @throws FileNotFoundException
+	 *             : Si el fichero no existe
 	 */
-	
+
 	public static void main(String[] args) throws FileNotFoundException {
 		String path = "./data/grafo.txt";
 		int[][] matriz = Fichero.getGrafo(path);
@@ -75,11 +77,13 @@ public class FuerzaBruta {
 			} else {
 				visitados.add(nodoActual);
 				for (int i = 0; i < matrizAdyacencia.length; i++) {
-					if (i != nodoActual && matrizAdyacencia[nodoActual][i] < Integer.MAX_VALUE) {
+					if (i != nodoActual
+							&& matrizAdyacencia[nodoActual][i] < Integer.MAX_VALUE) {
 						List<Integer> vis = new ArrayList<Integer>();
 						vis.addAll(visitados);
 						searchCaminosHamiltonianosRec(matrizAdyacencia, vis, i,
-								nodoOrigen, coste + matrizAdyacencia[nodoActual][i]);
+								nodoOrigen, coste
+										+ matrizAdyacencia[nodoActual][i]);
 					}
 				}
 			}
