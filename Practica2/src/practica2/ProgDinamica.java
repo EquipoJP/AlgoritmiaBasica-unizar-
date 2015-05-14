@@ -31,28 +31,52 @@ public class ProgDinamica {
 	}
 
 	/**
-	 * Aplica el método de programacion dinamica para resolver el problema de
-	 * caminos hamiltonianos en un grafo representado por su matriz de
-	 * adyacencia
 	 * 
 	 * @param matrizAdyacencia
-	 *            : matriz de adyacencia que representa un grafo
+	 * @return
 	 */
-	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
+	public static HashSet<Integer> inicializar(int[][] matrizAdyacencia) {
 		Gtab.initGtab(matrizAdyacencia);
 		HashSet<Integer> h = new HashSet<Integer>();
 		for (int i = 1; i < matrizAdyacencia.length; i++) {
 			h.add(i);
 		}
+		return h;
+	}
 
-		Info info = g(0, h, matrizAdyacencia);
+	/**
+	 * Realiza la busqueda por Programacion Dinamica del camino hamiltoniano de
+	 * minimo coste en un grafo y muestra los resultados por pantalla
+	 * 
+	 * @param matrizAdyacencia
+	 *            : matriz de adyacencia que representa un grafo
+	 */
+	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
+		HashSet<Integer> h = inicializar(matrizAdyacencia);
+		Info info = searchCaminosHamiltonianos(matrizAdyacencia, h);
 
 		System.out.println("Coste: " + info.getCoste());
 		System.out.println("Recorrido: " + info.getRecorrido());
 	}
 
 	/**
-	 * Función con memoria "g" que ejecuta el algoritmo de programacion dinamica
+	 * Aplica el metodo de programacion dinamica para resolver el problema de
+	 * caminos hamiltonianos en un grafo representado por su matriz de
+	 * adyacencia
+	 * 
+	 * @param matrizAdyacencia
+	 *            : matriz de adyacencia que representa un grafo
+	 * @param h
+	 *            : set con los vertices iniciales
+	 */
+	public static Info searchCaminosHamiltonianos(int[][] matrizAdyacencia,
+			HashSet<Integer> h) {
+		Info info = g(0, h, matrizAdyacencia);
+		return info;
+	}
+
+	/**
+	 * Funcion con memoria "g" que ejecuta el algoritmo de programacion dinamica
 	 * y emplea la tabla gtab para encontrar el camino hamiltoniano de menor
 	 * coste
 	 * 
@@ -62,7 +86,7 @@ public class ProgDinamica {
 	 *            : Conjunto de nodos restantes
 	 * @param L
 	 *            : Matriz de adyacencia con los costes de cada camino
-	 * @return el objeto Info con el recorrido más corto para recorrer el set de
+	 * @return el objeto Info con el recorrido mï¿½s corto para recorrer el set de
 	 *         nodos S y el coste de recorrer ese camino
 	 */
 	public static Info g(int i, Set<Integer> S, int[][] L) {

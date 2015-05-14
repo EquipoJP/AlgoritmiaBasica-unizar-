@@ -14,6 +14,8 @@ import java.util.List;
 
 public class FuerzaBruta {
 
+	private static List<String> resultados = new ArrayList<String>();
+
 	/**
 	 * Basandose en un fichero llamado "grafo.txt" muestra los caminos
 	 * hamiltonianos empleando fuerza bruta. Usado para testeo.
@@ -31,15 +33,29 @@ public class FuerzaBruta {
 	}
 
 	/**
+	 * Realiza la busqueda por fuerza bruta de todos los caminos hamiltonianos
+	 * en un grafo y muestra los resultados por pantalla
+	 * 
+	 * @param matrizAdyacencia
+	 *            : matriz de adyacencia que representa un grafo
+	 */
+	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
+		searchCaminosHamiltonianos(matrizAdyacencia);
+		for (String res : resultados) {
+			System.out.println(res);
+		}
+	}
+
+	/**
 	 * Aplica el algoritmo de fuerza bruta para resolver el problema de caminos
 	 * hamiltonianos en un grafo representado por su matriz de adyacencia
 	 * 
 	 * @param matrizAdyacencia
 	 *            : matriz de adyacencia que representa un grafo
 	 */
-	public static void showCaminosHamiltonianos(int[][] matrizAdyacencia) {
+	public static void searchCaminosHamiltonianos(int[][] matrizAdyacencia) {
+		resultados = new ArrayList<String>();
 		List<Integer> visitados = new ArrayList<Integer>();
-
 		searchCaminosHamiltonianosRec(matrizAdyacencia, visitados, 0, 0, 0);
 	}
 
@@ -66,7 +82,9 @@ public class FuerzaBruta {
 		if (visitados.size() == matrizAdyacencia.length
 				&& nodoActual == nodoOrigen) {
 			visitados.add(nodoActual);
-			System.out.println(visitados.toString() + " -- " + coste);
+			String res = visitados.toString() + " -- " + coste;
+			resultados.add(res);
+			// System.out.println(visitados.toString() + " -- " + coste);
 		} else if (visitados.size() == matrizAdyacencia.length
 				&& nodoActual != nodoOrigen) {
 			// Se han recorrido los vertices pero no se ha llegado al vertice

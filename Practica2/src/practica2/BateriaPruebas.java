@@ -11,6 +11,7 @@ package practica2;
  */
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 public class BateriaPruebas {
@@ -66,13 +67,16 @@ public class BateriaPruebas {
 		int vecesOptimoPD = 0;
 
 		for (int i : list) {
+
+			System.out.println("Test con matriz de adyacencia de (" + i + " x "
+					+ i + ")");
 			int[][] matriz = generarMatrizRandom(i);
 			long inicio, fin;
 
 			// Cronometrar inicial Fuerza Bruta
 			inicio = System.currentTimeMillis();
 			// Fuerza Bruta
-			FuerzaBruta.showCaminosHamiltonianos(matriz);
+			FuerzaBruta.searchCaminosHamiltonianos(matriz);
 			// Cronometrar fin Fuerza Bruta
 			fin = System.currentTimeMillis();
 
@@ -81,10 +85,12 @@ public class BateriaPruebas {
 					+ " milisegundos");
 			long tiempoFuerzaBruta = fin - inicio;
 
+			// Inicializacion de ProgDinamica
+			HashSet<Integer> h = ProgDinamica.inicializar(matriz);
 			// Cronometrar inicial ProgDinamica
 			inicio = System.currentTimeMillis();
 			// ProgDinamica
-			ProgDinamica.showCaminosHamiltonianos(matriz);
+			ProgDinamica.searchCaminosHamiltonianos(matriz, h);
 			// Cronometrar fin ProgDinamica
 			fin = System.currentTimeMillis();
 
@@ -99,6 +105,9 @@ public class BateriaPruebas {
 				vecesOptimoFB++;
 			}
 		}
+
+		System.out
+				.println("================================================================================");
 		// Mostrar cuantas veces ha sido optimo cada uno
 		System.out.println("Veces que ha sido optimo Fuerza Bruta: "
 				+ vecesOptimoFB);
