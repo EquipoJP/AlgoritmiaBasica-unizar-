@@ -23,31 +23,30 @@ public class BateriaPruebas {
 	 */
 	public static void main(String[] args) {
 
-		if(args.length<=0){
-			System.out.println("Uso del programa BateriaPruebas: "
-					+ "BateriaPruebas <listaEnteros>\n"
-					+ "Donde <listaEnteros> es una secuencia de enteros separados por un espacio\n"
-					+ "que indican los tamanos para las distintas matrices de adyacencias con las\n"
-					+ "que se testeara la eficiencia de los algoritmos\n"
-					+ "EJEMPLO:\n"
-					+ "BateriaPruebas 4 18 26\n"
-					+ "Ejecutara y cronometrara ambos algoritmos con matrices de adyacencia de\n"
-					+ "tamanos 4, 18 y 26. Todas ellas seran inicializadas aleatoriamente");
-		}
-		else{
+		if (args.length <= 0) {
+			System.out
+					.println("Uso del programa BateriaPruebas: "
+							+ "BateriaPruebas <listaEnteros>\n"
+							+ "Donde <listaEnteros> es una secuencia de enteros separados por un espacio\n"
+							+ "que indican los tamanos para las distintas matrices de adyacencias con las\n"
+							+ "que se testeara la eficiencia de los algoritmos\n\n"
+							+ "EJEMPLO:\n"
+							+ "BateriaPruebas 4 18 26\n"
+							+ "Ejecutara y cronometrara ambos algoritmos con matrices de adyacencia de\n"
+							+ "tamanos 4, 18 y 26. Todas ellas seran inicializadas aleatoriamente");
+		} else {
 			ArrayList<Integer> listaNumeros = new ArrayList<Integer>();
-			for(String numero : args){
-				try{
+			for (String numero : args) {
+				try {
 					int numerito = Integer.parseInt(numero);
-					if(numerito<2){
-						System.out.println(numerito+" no es un numero valido");
-					}
-					else{
+					if (numerito < 2) {
+						System.out
+								.println(numerito + " no es un numero valido");
+					} else {
 						listaNumeros.add(numerito);
 					}
-				}
-				catch(NumberFormatException e){
-					System.out.println(numero+" no es un numero");
+				} catch (NumberFormatException e) {
+					System.out.println(numero + " no es un numero");
 				}
 			}
 			testing(listaNumeros);
@@ -65,51 +64,64 @@ public class BateriaPruebas {
 	private static void testing(ArrayList<Integer> list) {
 		int vecesOptimoFB = 0;
 		int vecesOptimoPD = 0;
-		for(int i : list){
+
+		for (int i : list) {
 			int[][] matriz = generarMatrizRandom(i);
 			long inicio, fin;
-			//Cronometrar inicial Fuerza Bruta
+
+			// Cronometrar inicial Fuerza Bruta
 			inicio = System.currentTimeMillis();
-			//Fuerza Bruta
+			// Fuerza Bruta
 			FuerzaBruta.showCaminosHamiltonianos(matriz);
-			//Cronometrar fin Fuerza Bruta
+			// Cronometrar fin Fuerza Bruta
 			fin = System.currentTimeMillis();
-			//Mostrar resultado
-			System.out.println("Fuerza Bruta ha tardado "+ (fin - inicio) +" milisegundos");
-			long tiempoFuerzaBruta = fin-inicio;
-			
-			//Cronometrar inicial ProgDinamica
+
+			// Mostrar resultado
+			System.out.println("Fuerza Bruta ha tardado " + (fin - inicio)
+					+ " milisegundos");
+			long tiempoFuerzaBruta = fin - inicio;
+
+			// Cronometrar inicial ProgDinamica
 			inicio = System.currentTimeMillis();
-			//ProgDinamica
+			// ProgDinamica
 			ProgDinamica.showCaminosHamiltonianos(matriz);
-			//Cronometrar fin ProgDinamica
+			// Cronometrar fin ProgDinamica
 			fin = System.currentTimeMillis();
-			//Mostrar resultado
-			System.out.println("ProgDinamica ha tardado "+ (fin - inicio) +" milisegundos");
-			long tiempoProgDinamica = fin-inicio;
-			
-			if(tiempoFuerzaBruta>=tiempoProgDinamica){
+
+			// Mostrar resultado
+			System.out.println("ProgDinamica ha tardado " + (fin - inicio)
+					+ " milisegundos");
+			long tiempoProgDinamica = fin - inicio;
+
+			if (tiempoFuerzaBruta >= tiempoProgDinamica) {
 				vecesOptimoPD++;
-			}
-			else{
+			} else {
 				vecesOptimoFB++;
 			}
 		}
-		//Mostrar cuantas veces ha sido optimo cada uno
-		System.out.println("Veces que ha sido optimo Fuerza Bruta: "+vecesOptimoFB);
-		System.out.println("Veces que ha sido optimo ProgDinamica: "+vecesOptimoPD);
+		// Mostrar cuantas veces ha sido optimo cada uno
+		System.out.println("Veces que ha sido optimo Fuerza Bruta: "
+				+ vecesOptimoFB);
+		System.out.println("Veces que ha sido optimo ProgDinamica: "
+				+ vecesOptimoPD);
 	}
-	
-	private static int[][] generarMatrizRandom(int i){
+
+	/**
+	 * Metodo privado para la generacion de matrices de adyacencia aleatorias
+	 * 
+	 * @param i
+	 *            : dimensiones de la matriz (i x i)
+	 * @return una matriz de adyacencia (i x i) que representa un grafo
+	 */
+	private static int[][] generarMatrizRandom(int i) {
 		Random r = new Random();
 		int[][] returned = new int[i][i];
-		for(int j=0;j<i;j++){
-			for(int k=0;k<i;k++){
-				if(j!=k){
-					returned[j][k]=r.nextInt(500)+1;
-				}
-				else{
-					returned[j][k]=0;
+		for (int j = 0; j < i; j++) {
+			for (int k = 0; k < i; k++) {
+				if (j != k) {
+					returned[j][k] = r.nextInt(500) + 1;
+				} else {
+					returned[j][k] = 0;
 				}
 			}
 		}
