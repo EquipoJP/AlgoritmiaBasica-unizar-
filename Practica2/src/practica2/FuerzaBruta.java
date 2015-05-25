@@ -84,7 +84,6 @@ public class FuerzaBruta {
 			visitados.add(nodoActual);
 			String res = visitados.toString() + " -- " + coste;
 			resultados.add(res);
-			// System.out.println(visitados.toString() + " -- " + coste);
 		} else if (visitados.size() == matrizAdyacencia.length
 				&& nodoActual != nodoOrigen) {
 			// Se han recorrido los vertices pero no se ha llegado al vertice
