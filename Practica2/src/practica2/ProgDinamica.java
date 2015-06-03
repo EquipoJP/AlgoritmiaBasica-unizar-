@@ -102,6 +102,7 @@ public class ProgDinamica {
 			} else {
 				Integer masCorto = Integer.MAX_VALUE;
 				List<Integer> rec = new ArrayList<Integer>();
+				List<Integer> rectemp = new ArrayList<Integer>();
 				for (int j : S) {
 					HashSet<Integer> temp = new HashSet<Integer>();
 					temp.addAll(S);
@@ -110,10 +111,13 @@ public class ProgDinamica {
 					int distancia = L[i][j] + info.getCoste();
 					if (distancia < masCorto && distancia > 0) {
 						masCorto = distancia;
-						rec = info.getRecorrido();
+						rectemp = info.getRecorrido();
 					}
 				}
-				rec.add(0, i);
+				rec.add(i);
+				for(int a = 0; a < rectemp.size(); a++){
+					rec.add(rectemp.get(a));
+				}
 				Gtab.getGtab().get(S).set(i, new Info(masCorto, rec));
 				return new Info(masCorto, rec);
 			}
